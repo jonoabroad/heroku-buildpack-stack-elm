@@ -198,5 +198,7 @@ cp -Rp "$WORK_DIR/.stack-work" "$BUILD_DIR"
 
 # Making stack binaries available?
 mv "$WORK_DIR/vendor/bin/stack" "$BUILD_DIR/.local/bin"
+mv "$WORK_DIR/.stack" "$BUILD_DIR/.stack"
+set-env PATH "$BUILD_DIR/.stack:$PATH"
 
 speak "Finished!"
