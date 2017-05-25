@@ -15,10 +15,6 @@ function speak (){
 
 speak "Starting..."
 
-echo "BUILD_DIR is $BUILD_DIR"
-echo "CACHE_DIR is $CACHE_DIR"
-echo "  ENV_DIR is $ENV_DIR"
-
 BLACKLIST_REGEX="^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$"
 if [ -d "$ENV_DIR" ]; then
   speak "Exporting config vars"
@@ -204,11 +200,21 @@ cp -Rp "$WORK_DIR/.stack-work" "$BUILD_DIR"
 
 speak "DEBUG"
 
+echo "BUILD_DIR is $BUILD_DIR"
+echo "CACHE_DIR is $CACHE_DIR"
+echo "  ENV_DIR is $ENV_DIR"
+
 echo "$WORK_DIR content:"
 ls -la "$WORK_DIR" 
 
 echo "$BUILD_DIR content:"
 ls -la "$BUILD_DIR" 
+
+echo "$CACHE_DIR content:"
+ls -la "$CACHE_DIR" 
+
+echo "$ENV_DIR content:"
+ls -la "$ENV_DIR" 
 
 
 # Making stack binaries available?
