@@ -14,6 +14,7 @@ function speak (){
 }
 
 speak "Starting..."
+
 echo "BUILD_DIR is $BUILD_DIR"
 echo "CACHE_DIR is $CACHE_DIR"
 echo "  ENV_DIR is $ENV_DIR"
@@ -99,7 +100,7 @@ echo "export PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH" >> $buildpack/export
 PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH
 
 mkcd ${cache}/bin/elm-${ELM_VERSION}
-echo "-----> Retrieving elm ${ELM_VERSION}"
+speak "Retrieving elm ${ELM_VERSION}"
 download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
 download ${S3_URL}/elm/${ELM_VERSION} elm-make
@@ -199,11 +200,26 @@ speak "Caching .stack-work"
 rsync -avq "$WORK_DIR/.stack-work/" "$SANDBOX_DIR"
 cp -Rp "$WORK_DIR/.stack-work" "$BUILD_DIR"
 
+#-----------------
+
+speak "DEBUG"
+
+echo "$WORK_DIR content:"
+ls -la "$WORK_DIR" 
+
+echo "$BUILD_DIR content:"
+ls -la "$BUILD_DIR" 
+
+
 # Making stack binaries available?
 mv "$WORK_DIR/vendor/bin/stack" "$BUILD_DIR/.local/bin"
 
 mkdir -p "$BUILD_DIR/.stack"
 mv "$WORK_DIR/.stack" "$BUILD_DIR/.stack"
 set-env PATH "$BUILD_DIR/.stack:$PATH"
+
+
+
+#-----------------
 
 speak "Finished!"
