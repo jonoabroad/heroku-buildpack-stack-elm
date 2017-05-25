@@ -14,6 +14,9 @@ function speak (){
 }
 
 speak "Starting..."
+echo "BUILD_DIR is $BUILD_DIR"
+echo "CACHE_DIR is $CACHE_DIR"
+echo "  ENV_DIR is $ENV_DIR"
 
 BLACKLIST_REGEX="^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$"
 if [ -d "$ENV_DIR" ]; then
