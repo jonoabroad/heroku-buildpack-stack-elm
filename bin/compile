@@ -192,6 +192,9 @@ mkdir -p "$BUILD_DIR/.local"
 mv "$WORK_DIR/vendor/ghc-libs" "$BUILD_DIR/vendor"
 mv "$WORK_DIR/.local/bin" "$BUILD_DIR/.local"
 
+speak "Making elm js available"
+mv "$WORK_DIR/frontend/dist" "$BUILD_DIR/frontend/dist"
+
 speak "Caching .stack-work"
 rsync -avq "$WORK_DIR/.stack-work/" "$SANDBOX_DIR"
 cp -Rp "$WORK_DIR/.stack-work" "$BUILD_DIR"
@@ -215,16 +218,6 @@ ls -la "$CACHE_DIR"
 
 echo "$ENV_DIR content:"
 ls -la "$ENV_DIR" 
-
-
-# # Making stack binaries available?
-# mv "$WORK_DIR/vendor/bin/stack" "$BUILD_DIR/.local/bin"
-# 
-# mkdir -p "$BUILD_DIR/.stack"
-# cp -Rp "$CACHE_DIR/.stack" "$BUILD_DIR/.stack"
-# set-env PATH "$BUILD_DIR/.stack:$PATH"
-
-
 
 #-----------------
 
