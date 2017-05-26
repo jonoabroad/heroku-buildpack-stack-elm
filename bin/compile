@@ -186,11 +186,11 @@ set-env PATH "$WORK_DIR/.local/bin:$PATH"
 set-default-env LIBRARY_PATH "$WORK_DIR/vendor/ghc-libs:/usr/lib"
 set-default-env LD_LIBRARY_PATH "$WORK_DIR/vendor/ghc-libs:/usr/lib"
 
-# speak "Making stack binaries available"
-# mkdir -p "$BUILD_DIR/vendor"
-# mkdir -p "$BUILD_DIR/.local"
-# mv "$WORK_DIR/vendor/ghc-libs" "$BUILD_DIR/vendor"
-# mv "$WORK_DIR/.local/bin" "$BUILD_DIR/.local"
+speak "Making stack binaries available"
+mkdir -p "$BUILD_DIR/vendor"
+mkdir -p "$BUILD_DIR/.local"
+mv "$WORK_DIR/vendor/ghc-libs" "$BUILD_DIR/vendor"
+mv "$WORK_DIR/.local/bin" "$BUILD_DIR/.local"
 
 speak "Caching .stack-work"
 rsync -avq "$WORK_DIR/.stack-work/" "$SANDBOX_DIR"
@@ -217,12 +217,12 @@ echo "$ENV_DIR content:"
 ls -la "$ENV_DIR" 
 
 
-# Making stack binaries available?
-# mv "$WORK_DIR/vendor/bin/stack" "$BUILD_DIR/.local/bin"
-# 
-# mkdir -p "$BUILD_DIR/.stack"
-# mv "$WORK_DIR/.stack" "$BUILD_DIR/.stack"
-# set-env PATH "$BUILD_DIR/.stack:$PATH"
+Making stack binaries available?
+mv "$WORK_DIR/vendor/bin/stack" "$BUILD_DIR/.local/bin"
+
+mkdir -p "$BUILD_DIR/.stack"
+cp -Rp "$CACHE_DIR/.stack" "$BUILD_DIR/.stack"
+set-env PATH "$BUILD_DIR/.stack:$PATH"
 
 
 
