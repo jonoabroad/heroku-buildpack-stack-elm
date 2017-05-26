@@ -193,7 +193,7 @@ mv "$WORK_DIR/vendor/ghc-libs" "$BUILD_DIR/vendor"
 mv "$WORK_DIR/.local/bin" "$BUILD_DIR/.local"
 
 speak "Making elm js available"
-mv "$WORK_DIR/frontend/dist" "$BUILD_DIR/frontend"
+cp -Rp "$WORK_DIR/frontend/dist/*" "$BUILD_DIR/frontend/dist"
 
 speak "Caching .stack-work"
 rsync -avq "$WORK_DIR/.stack-work/" "$SANDBOX_DIR"
